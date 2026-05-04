@@ -1,0 +1,10 @@
+# Entornos
+venv/
+.env
+
+# outputs
+
+checkpoints/
+sac_models/
+td3_models/
+videos_trained/

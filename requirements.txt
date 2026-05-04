@@ -1,0 +1,11 @@
+# instala jpuyter
+pip install ipykernel
+# instalar pytorch adecuado para la version
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu130
+
+# instalar los componentes a utilizat
+pip install gymnasium[mujoco]
+pip install stable-baselines3
+pip install stable-baselines3[extra]
+pip install gymnasium[other]
+pip install tqdm rich
