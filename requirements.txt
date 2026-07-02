@@ -9,3 +9,5 @@ pip install stable-baselines3
 pip install stable-baselines3[extra]
 pip install gymnasium[other]
 pip install tqdm rich
+
+pip install pyarrow

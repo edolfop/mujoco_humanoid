@@ -1,3 +1,5 @@
+import mujoco
+
 import gymnasium as gym
 import numpy as np
 from gymnasium.envs.mujoco.humanoid_v5 import HumanoidEnv
@@ -14,12 +16,13 @@ def mass_center(model, data):
 class CustomHumanoidEnv(HumanoidEnv):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        print("init")
         # Variables para guardar estado entre pasos
         self.left_knee_history = deque([0.0, 0.0, 0.0], maxlen=3)
         self.right_knee_history = deque([0.0, 0.0, 0.0], maxlen=3)
-        self.left_knee_qpos_idx = 11
-        self.right_knee_qpos_idx = 7    
-        self.delta_knee_mov = 0.1
+        self.left_knee_qpos_idx = None#11
+        self.right_knee_qpos_idx = None#7    
+        self.delta_knee_mov = 0.02 #original 0.1
         self.knee_reward_base = 1
     
     def reset(self, seed=None, options=None):
@@ -31,6 +34,7 @@ class CustomHumanoidEnv(HumanoidEnv):
             r_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_JOINT, 'right_knee')
             self.left_knee_qpos_idx = self.model.jnt_qposadr[l_id]
             self.right_knee_qpos_idx = self.model.jnt_qposadr[r_id]
+            print("left knee: ", self.left_knee_qpos_idx, " right knee: ", self.right_knee_qpos_idx)
 
         # Inicializar historial con la posición real para evitar sesgo de ceros
         start_l = self.data.qpos[self.left_knee_qpos_idx]
