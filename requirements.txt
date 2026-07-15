@@ -11,3 +11,4 @@ pip install gymnasium[other]
 pip install tqdm rich
 
 pip install pyarrow
+pip install openpyxl

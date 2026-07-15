@@ -16,7 +16,7 @@ def mass_center(model, data):
 class CustomHumanoidEnv(HumanoidEnv):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        print("init")
+        #print("init")
         # Variables para guardar estado entre pasos
         self.left_knee_history = deque([0.0, 0.0, 0.0], maxlen=3)
         self.right_knee_history = deque([0.0, 0.0, 0.0], maxlen=3)
@@ -30,6 +30,7 @@ class CustomHumanoidEnv(HumanoidEnv):
         
         # Mapear joint -> índice en qpos (solo una vez)
         if self.left_knee_qpos_idx is None:
+            print("Discovering knees")
             l_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_JOINT, 'left_knee')
             r_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_JOINT, 'right_knee')
             self.left_knee_qpos_idx = self.model.jnt_qposadr[l_id]
